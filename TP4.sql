@@ -72,4 +72,4 @@ WHERE date_paiement IS NULL
 
 SELECT *
 FROM facture
-WHERE date_paiement IS NULL AND GETDATE() > date_paiement
+WHERE date_paiement IS NULL AND DATEADD(DAY, 30, date_crea) > date_paiement
