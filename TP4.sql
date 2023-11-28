@@ -67,3 +67,9 @@ FROM facture
 
 SELECT total FROM facture
 WHERE date_paiement IS NULL
+
+/* Calculer les factures en retard de paiement */
+
+SELECT *
+FROM facture
+WHERE date_paiement IS NULL AND GETDATE() > date_paiement
