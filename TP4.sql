@@ -70,6 +70,10 @@ WHERE date_paiement IS NULL
 
 /* Calculer les factures en retard de paiement */
 
-SELECT *
+SELECT *, DATEDIFF(Day, date_crea, DATEADD(DAY, -30, GETDATE())) as JourRetard, (
+	SELECT SUM(total) as montantFactureRetard
+	FROM facture
+	WHERE date_paiement IS NULL AND date_crea < DATEADD(DAY, -30, GETDATE())
+) as montantTotalRetard
 FROM facture
-WHERE date_paiement IS NULL AND DATEADD(DAY, 30, date_crea) > date_paiement
+WHERE date_paiement IS NULL AND date_crea < DATEADD(DAY, -30, GETDATE())
